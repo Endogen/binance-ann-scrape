@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import sys
 import time
 import datetime
 import requests
@@ -13,6 +14,10 @@ BASE_URL = "https://www.binance.com"
 check = True
 cache = list()
 updtr = Updater("891197415:AAEyQNI2zxf0cBkGg2t0IUVDGcWDcI7JTFk")
+
+wait = 5
+if sys.argv[1:]:
+    wait = float(sys.argv[1])
 
 
 def stop(bot, update):
@@ -33,7 +38,7 @@ updtr.start_polling(clean=True)
 
 init = True
 while check:
-    time.sleep(2)
+    time.sleep(wait)
 
     response = requests.get(f"{BASE_URL}/en/support/announcement")
 
@@ -53,7 +58,7 @@ while check:
         if text in cache:
             continue
         else:
-            print(datetime.datetime.now(), "NEW ENTRY", text)
+            print(datetime.datetime.now(), text)
             url = BASE_URL + news["href"]
 
             try:
