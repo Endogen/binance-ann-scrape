@@ -40,7 +40,7 @@ init = True
 while check:
     time.sleep(wait)
 
-    response = requests.get(f"{BASE_URL}/en/support/announcement")
+    response = requests.get(f"{BASE_URL}/en/support/announcement", {"timeout": wait})
 
     if response.status_code != 200:
         print("Status code " + str(response.status_code))
